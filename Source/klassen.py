@@ -1,12 +1,11 @@
-
-class Kleurenwiezen:
+class Kleurenwiezen():
 
     def __init__(self, speler1, speler2, speler3, speler4):
         self.speler1 = speler1
         self.speler2 = speler2
         self.speler3 = speler3
         self.speler4 = speler4
-        self.scores = {speler1: 0, speler2: 0, speler3: 0, speler4: 0}
+        self.scores = {speler1: 0, self.speler2: 0, self.speler3: 0, self.speler4: 0}
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.speler1!r}, {self.speler2!r}, {self.speler3!r}, {self.speler4!r})"
@@ -14,7 +13,7 @@ class Kleurenwiezen:
     def score(self):
         return f"{self.scores!r}"
 
-    def update_score(self, spel, speler, vrager, gelukt, overslagen=0):
+    def update_score(self, speler, spel, vrager, gelukt, overslagen=0):
         puntenverdeling_vrager_gelukt = {
             "Samen 8": {"vrager": [7, 10, 13, 16, 19, 30], "niet_vrager": [-7, -10, -13, -16, -19, -30]},
             "Solo 5": {"vrager": [9, 12, 15, 21, 21, 21, 21, 21, 21], "niet_vrager": [-3, -4, -5, -7, -7, -7, -7, -7, -7]},
@@ -60,3 +59,10 @@ class Kleurenwiezen:
             "Abondance 12": {"vrager": [-120], "niet_vrager": [40]},
             "Soloslim": {"vrager": [-240], "niet_vrager": [80]}
         }
+
+        if speler == self.speler1:
+            if vrager == True:
+                if gelukt == True:
+                    self.scores['speler1'] += puntenverdeling_vrager_gelukt[spel]['vrager'][overslagen]
+
+
