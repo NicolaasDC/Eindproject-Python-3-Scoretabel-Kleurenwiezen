@@ -1,13 +1,19 @@
-from Source.klassen import Speler
+from Source.klassen import Kleurenwiezen
+import tkinter as tk
+from tkinter import simpledialog
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
 
-naam1 = input('Geef speler 1 in: ')
-naam2 = input('Geef speler 1 in: ')
-naam3 = input('Geef speler 1 in: ')
-naam4 = input('Geef speler 1 in: ')
+# Maak het hoofdvenster aan met ttkbootstrap
+root = ttk.Window(themename="superhero")
+root.withdraw()  # Verberg het hoofdvenster
 
-speler1 = Speler(naam1)
-speler2 = Speler(naam2)
-speler3 = Speler(naam3)
-speler4 = Speler(naam4)
+speler1 = simpledialog.askstring(title="Speler", prompt="Geef de naam van speler 1:", parent=root)
+speler2 = simpledialog.askstring(title="Speler", prompt="Geef de naam van speler 2:", parent=root)
+speler3 = simpledialog.askstring(title="Speler", prompt="Geef de naam van speler 3:", parent=root)
+speler4 = simpledialog.askstring(title="Speler", prompt="Geef de naam van speler 4:", parent=root)
 
-print(speler1,speler2,speler3,speler4)
+# Sluit het hoofdvenster
+root.destroy()
+
+kleurenwiezen = Kleurenwiezen(speler1, speler2, speler3, speler4)
