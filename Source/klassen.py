@@ -64,5 +64,46 @@ class Kleurenwiezen():
             if vrager == True:
                 if gelukt == True:
                     self.scores['speler1'] += puntenverdeling_vrager_gelukt[spel]['vrager'][overslagen]
+                if gelukt == False:
+                    self.scores['speler1'] += puntenverdeling_vrager_mislukt[spel]['vrager'][overslagen]
+            if vrager == False:
+                if gelukt == True:
+                    self.scores['speler1'] += puntenverdeling_vrager_gelukt[spel]['niet_vrager'][overslagen]
+                if gelukt == False:
+                    self.scores['speler1'] += puntenverdeling_vrager_mislukt[spel]['niet_vrager'][overslagen]
 
+        if speler == self.speler2:
+            if vrager == True:
+                if gelukt == True:
+                    self.scores['speler2'] += puntenverdeling_vrager_gelukt[spel]['vrager'][overslagen]
+                if gelukt == False:
+                    self.scores['speler2'] += puntenverdeling_vrager_mislukt[spel]['vrager'][overslagen]
+            if vrager == False:
+                if gelukt == True:
+                    self.scores['speler2'] += puntenverdeling_vrager_gelukt[spel]['niet_vrager'][overslagen]
+                if gelukt == False:
+                    self.scores['speler2'] += puntenverdeling_vrager_mislukt[spel]['niet_vrager'][overslagen]
 
+        if speler == self.speler3:
+            if vrager == True:
+                if gelukt == True:
+                    self.scores['speler3'] += puntenverdeling_vrager_gelukt[spel]['vrager'][overslagen]
+                if gelukt == False:
+                    self.scores['speler3'] += puntenverdeling_vrager_mislukt[spel]['vrager'][overslagen]
+            if vrager == False:
+                if gelukt == True:
+                    self.scores['speler3'] += puntenverdeling_vrager_gelukt[spel]['niet_vrager'][overslagen]
+                if gelukt == False:
+                    self.scores['speler3'] += puntenverdeling_vrager_mislukt[spel]['niet_vrager'][overslagen]
+
+        if speler == self.speler4:
+            if vrager == True:
+                if gelukt == True:
+                    self.scores['speler4'] += puntenverdeling_vrager_gelukt[spel]['vrager'][overslagen]
+                if gelukt == False:
+                    self.scores['speler4'] += puntenverdeling_vrager_mislukt[spel]['vrager'][overslagen]
+            if vrager == False:
+                if gelukt == True:
+                    self.scores['speler4'] += puntenverdeling_vrager_gelukt[spel]['niet_vrager'][overslagen]
+                if gelukt == False:
+                    self.scores['speler4'] += puntenverdeling_vrager_mislukt[spel]['niet_vrager'][overslagen]
