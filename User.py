@@ -1,8 +1,11 @@
 from Source.klassen import Kleurenwiezen
 import tkinter as tk
-from tkinter import simpledialog, messagebox
-import ttkbootstrap as ttk
+from tkinter import filedialog, messagebox
+from tkinter import ttk
 from ttkbootstrap.constants import *
+import pandas as pd
+import ast
+from pandasgui import show
 
 rondes = []
 
@@ -11,6 +14,7 @@ Speler1 = ""
 Speler2 = ""
 Speler3 = ""
 Speler4 = ""
+
 
 def create_window(player_num, submit_command):
     root = ttk.Window(themename="superhero")
@@ -68,10 +72,6 @@ Speler4 = 'Jonas'
 kleurenwiezen = Kleurenwiezen(Speler1, Speler2, Speler3, Speler4)
 
 
-
-# print(kleurenwiezen.score())
-
-
 def nieuw_spel():
     try:
         def selecteer_spel():
@@ -91,7 +91,8 @@ def nieuw_spel():
 
         # Create a combobox (drop-down menu)
         options_spel = ["Samen 8", "Solo 5", "Samen 9", "Solo 6", "Samen 10", "Solo 7", "Samen 11", 'Kleine miserie',
-                        "Samen 12", "Solo 8", "Samen 13", "Abondance 9", "Troel voor 8", "Troel voor 9", "Grote miserie",
+                        "Samen 12", "Solo 8", "Samen 13", "Abondance 9", "Troel voor 8", "Troel voor 9",
+                        "Grote miserie",
                         "Abondance 10", "Abondance 11", "Abondance 12", "Solo slim"]
         combo = ttk.Combobox(root, values=options_spel)
         combo.pack(pady=10)
@@ -220,7 +221,6 @@ def nieuw_spel():
         # Run the application
         root.mainloop()
 
-
         spellen_overslagen = ["Samen 8", "Solo 5", "Samen 9", "Solo 6", "Samen 10", "Solo 7", "Samen 11", "Samen 12",
                               "Troel voor 8", "Troel voor 9"]
 
@@ -252,7 +252,6 @@ def nieuw_spel():
             # Run the application
             root.mainloop()
 
-
         if geslaagd == False and spel in spellen_overslagen:
             def selecteer_overslagen():
                 selected_value = combo.get()
@@ -281,8 +280,6 @@ def nieuw_spel():
             # Run the application
             root.mainloop()
 
-
-
         spelers = [Speler1, Speler2, Speler3, Speler4]
         twee_spelers = ["Samen 8", "Samen 9", "Samen 10", "Samen 11", "Samen 12", "Samen 13", "Troel voor 8",
                         "Troel voor 9"]
@@ -309,14 +306,30 @@ def nieuw_spel():
                 kleurenwiezen.update_score(spelers[2], spel, False, geslaagd)
 
         kleurenwiezen.scores['Spel'] = spel
-        rondes.append(kleurenwiezen.score())
+        huidige_score = kleurenwiezen.score()
+        rondes.append(ast.literal_eval(huidige_score))
 
     except Exception as e:
         messagebox.showerror("Verkeerde input", str(e))
+        nieuw_spel()
 
 
+def write_to_csv():
+    df = pd.DataFrame(rondes)
+    # Create a Tkinter root window
+    root = tk.Tk()
+    root.withdraw()  # Hide the root window
+
+    # Open a file dialog to select the save location and file type
+    file_path = filedialog.asksaveasfilename(defaultextension=".csv")
+    df.to_csv(file_path, index=False)
+
+
+def toon_scoretabel():
+    df = pd.DataFrame(rondes)
+    gui = show(df)
 
 
 nieuw_spel()
-print(kleurenwiezen.score())
-print(rondes)
+nieuw_spel()
+
