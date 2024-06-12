@@ -17,6 +17,7 @@ Speler4 = ""
 
 def create_window(player_num, submit_command):
     root = tk.Tk()
+    root.title("Welkom, geef de 4 spelers in")
     root.geometry('300x150')
 
     label = ttk.Label(root, text=f"Voer speler {player_num} in:")
@@ -57,16 +58,10 @@ def speler4(root):
 
 
 # Maak vensters voor elke speler
-# create_window(1, speler1)
-# create_window(2, speler2)
-# create_window(3, speler3)
-# create_window(4, speler4)
-
-# Print de namen van de spelers
-Speler1 = 'Nico'
-Speler2 = 'Jelle'
-Speler3 = 'Brecht'
-Speler4 = 'Jonas'
+create_window(1, speler1)
+create_window(2, speler2)
+create_window(3, speler3)
+create_window(4, speler4)
 
 kleurenwiezen = Kleurenwiezen(Speler1, Speler2, Speler3, Speler4)
 
@@ -340,16 +335,19 @@ def nieuw_spel():
 
         # Create the main application window
         root = tk.Tk()
-        root.geometry("400x300")  # Main window size
+        root.geometry("400x150")  # Main window size
         root.title("Huidige score")
 
         # Add a label to the main window
-        main_label = tk.Label(root, text=kleurenwiezen.score())
+        main_label = tk.Label(root, text=f"""{spel} 
+{kleurenwiezen.speler1}: {kleurenwiezen.scores[kleurenwiezen.speler1]}
+{kleurenwiezen.speler2}: {kleurenwiezen.scores[kleurenwiezen.speler2]} 
+{kleurenwiezen.speler3}: {kleurenwiezen.scores[kleurenwiezen.speler3]} 
+{kleurenwiezen.speler4}: {kleurenwiezen.scores[kleurenwiezen.speler4]}""")
         main_label.pack(pady=20)
 
         # Keep the window open
         root.mainloop()
-
 
     except Exception as e:
         messagebox.showerror("Verkeerde input", str(e))
@@ -369,12 +367,47 @@ def write_to_csv():
 
 def toon_scoretabel():
     df = pd.DataFrame(rondes)
-    gui = show(df)
+    show(df)
 
 
-nieuw_spel()
-nieuw_spel()
-nieuw_spel()
-nieuw_spel()
-print(rondes)
-toon_scoretabel()
+def wat_wil_je_doen():
+    def selecteer_optie():
+        selected_value = combo.get()
+        global optie
+        optie = selected_value
+        root.destroy()  # Close the window
+
+    # Create the main application window
+    root = tk.Tk()
+    root.title("Wat wil je doen?")
+    root.geometry("300x200")
+
+    # Create a label
+    label = tk.Label(root, text="Selecteer een optie?")
+    label.pack(pady=10)
+
+    # Create a combobox (drop-down menu)
+    options = ["Een spelletje kaarten", "Scoretabel weergeven", "Scoretabel opslaan", "Stoppen met kaarten"]
+    combo = ttk.Combobox(root, values=options)
+    combo.pack(pady=10)
+
+    # Create a button to select the option and close the window
+    button = tk.Button(root, text="Select", command=selecteer_optie)
+    button.pack(pady=10)
+
+    # Run the application
+    root.mainloop()
+
+    if optie == "Een spelletje kaarten":
+        nieuw_spel()
+    elif optie == "Scoretabel weergeven":
+        toon_scoretabel()
+    elif optie == "Scoretabel opslaan":
+        write_to_csv()
+    elif optie == "Stoppen met kaarten":
+        return
+    while optie != "Stoppen met kaarten":
+        wat_wil_je_doen()
+
+
+wat_wil_je_doen()

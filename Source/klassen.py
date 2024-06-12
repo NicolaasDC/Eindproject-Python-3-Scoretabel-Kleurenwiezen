@@ -30,9 +30,9 @@ class Kleurenwiezen():
             "Troel voor 8": {"vrager": [16, 16, 16, 16, 16, 30], "niet_vrager": [-16, -16, -16, -16, -16, -30]},
             "Troel voor 9": {"vrager": [16, 16, 16, 16, 30], "niet_vrager": [-16, -16, -16, -16, -30]},
             "Grote miserie": {"vrager": [36], "niet_vrager": [-12]},
-            "Abondance 10": {"vrager": [42], "niet_vrager": [-42]},
+            "Abondance 10": {"vrager": [42], "niet_vrager": [-14]},
             "Abondance 11": {"vrager": [60], "niet_vrager": [-20]},
-            "Blote miserie": {"vrager": [75], "niet_vrager": [-75]},
+            "Blote miserie": {"vrager": [75], "niet_vrager": [-25]},
             "Abondance 12": {"vrager": [120], "niet_vrager": [-40]},
             "Solo slim": {"vrager": [240], "niet_vrager": [-80]}
         }
@@ -53,9 +53,9 @@ class Kleurenwiezen():
             "Troel voor 8": {"vrager": [-16, -16, -16, -16, 16, -16, -16, -16], "niet_vrager": [16, 16, 16, 16, 16, 16, 16, 16]},
             "Troel voor 9": {"vrager": [-16, -16, -16, -16, 16, -16, -16, -16], "niet_vrager": [16, 16, 16, 16, 16, 16, 16, 16]},
             "Grote miserie": {"vrager": [-36], "niet_vrager": [12]},
-            "Abondance 10": {"vrager": [-42], "niet_vrager": [42]},
+            "Abondance 10": {"vrager": [-42], "niet_vrager": [14]},
             "Abondance 11": {"vrager": [-60], "niet_vrager": [20]},
-            "Blote miserie": {"vrager": [-75], "niet_vrager": [75]},
+            "Blote miserie": {"vrager": [-75], "niet_vrager": [25]},
             "Abondance 12": {"vrager": [-120], "niet_vrager": [40]},
             "Solo slim": {"vrager": [-240], "niet_vrager": [80]}
         }
