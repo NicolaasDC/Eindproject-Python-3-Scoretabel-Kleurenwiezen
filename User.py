@@ -18,7 +18,7 @@ Speler4 = ""
 def create_window(player_num, submit_command):
     root = tk.Tk()
     root.title("Welkom, geef de 4 spelers in")
-    root.geometry('300x150')
+    root.geometry('400x150')
 
     label = ttk.Label(root, text=f"Voer speler {player_num} in:")
     label.pack(pady=10)
@@ -254,13 +254,13 @@ def nieuw_spel():
             root.mainloop()
 
         if geslaagd == False and spel in spellen_verliesslagen:
-            hoeveel_verliesslagen = {"Samen 8": [0, 1, 2, 3, 4, 5, 6, 7], "Solo 5": [0, 1, 2, 3, 4],
-                                     "Samen 9": [0, 1, 2, 3, 4, 5, 6, 7],
-                                     "Solo 6": [0, 1, 2, 3, 4, 5], "Samen 10": [0, 1, 2, 3, 4, 5, 6, 7],
-                                     "Solo 7": [0, 1, 2, 3, 4, 5, 6], "Samen 11": [0, 1, 2, 3, 4, 5, 6, 7],
-                                     "Solo 8": [0, 1, 2, 3, 4, 5, 6, 7],
-                                     "Samen 12": [0, 1, 2, 3, 4, 5, 6, 7], "Samen 13": [0, 1, 2, 3, 4, 5, 6, 7],
-                                     "Troel voor 8": [0, 1, 2, 3, 4, 5, 6, 7], "Troel voor 9": [0, 1, 2, 3, 4, 5, 6, 7]}
+            hoeveel_verliesslagen = {"Samen 8": [1, 2, 3, 4, 5, 6, 7], "Solo 5": [1, 2, 3, 4],
+                                     "Samen 9": [1, 2, 3, 4, 5, 6, 7],
+                                     "Solo 6": [1, 2, 3, 4, 5], "Samen 10": [1, 2, 3, 4, 5, 6, 7],
+                                     "Solo 7": [1, 2, 3, 4, 5, 6], "Samen 11": [1, 2, 3, 4, 5, 6, 7],
+                                     "Solo 8": [01, 2, 3, 4, 5, 6, 7],
+                                     "Samen 12": [1, 2, 3, 4, 5, 6, 7], "Samen 13": [1, 2, 3, 4, 5, 6, 7],
+                                     "Troel voor 8": [1, 2, 3, 4, 5, 6, 7], "Troel voor 9": [1, 2, 3, 4, 5, 6, 7]}
 
             def selecteer_overslagen():
                 selected_value = combo.get()
