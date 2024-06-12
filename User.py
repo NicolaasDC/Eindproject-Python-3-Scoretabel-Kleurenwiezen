@@ -2,7 +2,6 @@ from Source.klassen import Kleurenwiezen
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from tkinter import ttk
-from ttkbootstrap.constants import *
 import pandas as pd
 import ast
 from pandasgui import show
@@ -17,17 +16,17 @@ Speler4 = ""
 
 
 def create_window(player_num, submit_command):
-    root = ttk.Window(themename="superhero")
+    root = tk.Tk()
     root.geometry('300x150')
 
     label = ttk.Label(root, text=f"Voer speler {player_num} in:")
     label.pack(pady=10)
 
     global entry
-    entry = ttk.Entry(root, bootstyle=PRIMARY)
+    entry = ttk.Entry(root)
     entry.pack(pady=10)
 
-    button = ttk.Button(root, text="Submit", command=lambda: submit_command(root), bootstyle=SUCCESS)
+    button = ttk.Button(root, text="Submit", command=lambda: submit_command(root))
     button.pack(pady=10)
 
     root.mainloop()
@@ -223,8 +222,15 @@ def nieuw_spel():
 
         spellen_overslagen = ["Samen 8", "Solo 5", "Samen 9", "Solo 6", "Samen 10", "Solo 7", "Samen 11", "Samen 12",
                               "Troel voor 8", "Troel voor 9"]
+        spellen_verliesslagen = ["Samen 8", "Solo 5", "Samen 9", "Solo 6", "Samen 10", "Solo 7", "Samen 11", "Solo 8",
+                                 "Samen 12", "Samen 13", "Troel voor 8", "Troel voor 9"]
 
         if geslaagd == True and spel in spellen_overslagen:
+            max_overslagen = {"Samen 8": [0, 1, 2, 3, 4, 5], "Solo 5": [0, 1, 2, 3], "Samen 9": [0, 1, 2, 3, 4],
+                              "Solo 6": [0, 1, 2], "Samen 10": [0, 1, 2, 3], "Solo 7": [0, 1], "Samen 11": [0, 1, 2],
+                              "Samen 12": [0, 1],
+                              "Troel voor 8": [0, 1, 2, 3, 4, 5], "Troel voor 9": [0, 1, 2, 3, 4]}
+
             def selecteer_overslagen():
                 selected_value = combo.get()
                 global overslagen
@@ -241,7 +247,7 @@ def nieuw_spel():
             label.pack(pady=10)
 
             # Create a combobox (drop-down menu)
-            options_overslagen = [0, 1, 2, 3, 4, 5]
+            options_overslagen = max_overslagen[spel]
             combo = ttk.Combobox(root, values=options_overslagen)
             combo.pack(pady=10)
 
@@ -252,7 +258,15 @@ def nieuw_spel():
             # Run the application
             root.mainloop()
 
-        if geslaagd == False and spel in spellen_overslagen:
+        if geslaagd == False and spel in spellen_verliesslagen:
+            hoeveel_verliesslagen = {"Samen 8": [0, 1, 2, 3, 4, 5, 6, 7], "Solo 5": [0, 1, 2, 3, 4],
+                                     "Samen 9": [0, 1, 2, 3, 4, 5, 6, 7],
+                                     "Solo 6": [0, 1, 2, 3, 4, 5], "Samen 10": [0, 1, 2, 3, 4, 5, 6, 7],
+                                     "Solo 7": [0, 1, 2, 3, 4, 5, 6], "Samen 11": [0, 1, 2, 3, 4, 5, 6, 7],
+                                     "Solo 8": [0, 1, 2, 3, 4, 5, 6, 7],
+                                     "Samen 12": [0, 1, 2, 3, 4, 5, 6, 7], "Samen 13": [0, 1, 2, 3, 4, 5, 6, 7],
+                                     "Troel voor 8": [0, 1, 2, 3, 4, 5, 6, 7], "Troel voor 9": [0, 1, 2, 3, 4, 5, 6, 7]}
+
             def selecteer_overslagen():
                 selected_value = combo.get()
                 global overslagen
@@ -269,7 +283,7 @@ def nieuw_spel():
             label.pack(pady=10)
 
             # Create a combobox (drop-down menu)
-            options_overslagen = [1, 2, 3, 4, 5, 6, 7, 8]
+            options_overslagen = hoeveel_verliesslagen[spel]
             combo = ttk.Combobox(root, values=options_overslagen)
             combo.pack(pady=10)
 
@@ -292,12 +306,27 @@ def nieuw_spel():
             kleurenwiezen.update_score(spelers[1], spel, False, geslaagd, int(overslagen))
 
         if spel not in twee_spelers:
-            if spel in ["Solo 5", "Solo 6", "Solo 7", "Solo 8"]:
+            if spel == "Solo 8":  # Solo 8 heeft geen overslagen, wel verliesslagen
+                if geslaagd == True:
+                    kleurenwiezen.update_score(vrager1, spel, True, geslaagd)
+                    spelers.remove(vrager1)
+                    kleurenwiezen.update_score(spelers[0], spel, False, geslaagd)
+                    kleurenwiezen.update_score(spelers[1], spel, False, geslaagd)
+                    kleurenwiezen.update_score(spelers[2], spel, False, geslaagd)
+                if geslaagd == False:
+                    kleurenwiezen.update_score(vrager1, spel, True, geslaagd, int(overslagen))
+                    spelers.remove(vrager1)
+                    kleurenwiezen.update_score(spelers[0], spel, False, geslaagd, int(overslagen))
+                    kleurenwiezen.update_score(spelers[1], spel, False, geslaagd, int(overslagen))
+                    kleurenwiezen.update_score(spelers[2], spel, False, geslaagd, int(overslagen))
+
+            elif spel in ["Solo 5", "Solo 6", "Solo 7"]:
                 kleurenwiezen.update_score(vrager1, spel, True, geslaagd, int(overslagen))
                 spelers.remove(vrager1)
                 kleurenwiezen.update_score(spelers[0], spel, False, geslaagd, int(overslagen))
                 kleurenwiezen.update_score(spelers[1], spel, False, geslaagd, int(overslagen))
                 kleurenwiezen.update_score(spelers[2], spel, False, geslaagd, int(overslagen))
+
             else:
                 kleurenwiezen.update_score(vrager1, spel, True, geslaagd)
                 spelers.remove(vrager1)
@@ -308,6 +337,19 @@ def nieuw_spel():
         kleurenwiezen.scores['Spel'] = spel
         huidige_score = kleurenwiezen.score()
         rondes.append(ast.literal_eval(huidige_score))
+
+        # Create the main application window
+        root = tk.Tk()
+        root.geometry("400x300")  # Main window size
+        root.title("Huidige score")
+
+        # Add a label to the main window
+        main_label = tk.Label(root, text=kleurenwiezen.score())
+        main_label.pack(pady=20)
+
+        # Keep the window open
+        root.mainloop()
+
 
     except Exception as e:
         messagebox.showerror("Verkeerde input", str(e))
@@ -332,4 +374,7 @@ def toon_scoretabel():
 
 nieuw_spel()
 nieuw_spel()
-
+nieuw_spel()
+nieuw_spel()
+print(rondes)
+toon_scoretabel()
