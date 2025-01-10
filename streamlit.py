@@ -45,7 +45,6 @@ def set_player_names():
             
             # Navigate to the main menu page
             st.session_state['page'] = 'main_menu'
-            st.success("Spelers zijn ingesteld en je wordt doorgestuurd naar het hoofdmenu!")
 
 # Function to start a new game
 def nieuw_spel():
