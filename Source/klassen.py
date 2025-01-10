@@ -5,8 +5,8 @@ class Kleurenwiezen():
         self.speler2 = speler2
         self.speler3 = speler3
         self.speler4 = speler4
-        self.spel = None
-        self.scores = {speler1: 0, speler2: 0, speler3: 0, speler4: 0, "spel": None}
+        self.spel = ""
+        self.scores = {speler1: 0, speler2: 0, speler3: 0, speler4: 0, "spel": self.spel}
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.speler1!r}, {self.speler2!r}, {self.speler3!r}, {self.speler4!r})"

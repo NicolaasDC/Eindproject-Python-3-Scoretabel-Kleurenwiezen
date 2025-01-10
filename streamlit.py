@@ -116,8 +116,9 @@ def write_to_csv():
     df = pd.DataFrame(st.session_state['rondes'])
     st.download_button("Download Score Tabel", df.to_csv(index=False), file_name=f"{date.today()}-{st.session_state['players'][0]}-{st.session_state['players'][1]}-{st.session_state['players'][2]}-{st.session_state['players'][3]}.csv", mime="text/csv")    
 
-    if st.button("Terug"):
-        st.session_state['page'] = 'main_menu'
+    # Voeg een knop toe om terug te gaan naar het hoofdmenu
+    if st.button("Terug naar hoofdmenu"):
+        st.session_state['page'] = 'main_menu'    
 
 # Main menu
 def main_menu():
@@ -131,14 +132,20 @@ def main_menu():
         elif keuze == "Scoretabel opslaan":
             st.session_state['page'] = 'save_scores'
         elif keuze == "Laatste spelletje wissen":
-            # Ask for a confirmation before removing the last game
-            if 'rondes' in st.session_state and len(st.session_state['rondes']) > 0:
-                st.session_state['rondes'].pop()
-                st.success("Laatste spelletje verwijderd!")
+            rondes = st.session_state['rondes']
+            kleurenwiezen = st.session_state['kleurenwiezen']
+            if len(rondes) == 1:
+                rondes.pop()
+                kleurenwiezen.scores = {kleurenwiezen.speler1: 0, kleurenwiezen.speler2: 0, kleurenwiezen.speler3: 0, kleurenwiezen.speler4: 0, "spel": None}
+                st.success("Laatste spelletje gewist!")
+            if len(rondes) > 1:
+                kleurenwiezen.scores = {kleurenwiezen.speler1: rondes[-2][kleurenwiezen.speler1], kleurenwiezen.speler2: rondes[-2][kleurenwiezen.speler2], kleurenwiezen.speler3: rondes[-2][kleurenwiezen.speler3], kleurenwiezen.speler4: rondes[-2][kleurenwiezen.speler4]}
+                rondes.pop()
+                st.success("Laatste spelletje gewist!")
             else:
-                st.write("Er zijn geen gespeelde spelletjes om te wissen.")
+                st.error("Er zijn nog geen spelletjes gespeeld om te wissen!")
 
-            
+
     st.title("Score Tabel")
 
     # Display the DataFrame with the custom index
@@ -149,6 +156,7 @@ def main_menu():
         df = pd.DataFrame(st.session_state['rondes'])
         df.index = range(1, len(df) + 1)
         st.dataframe(df, use_container_width=True)
+        
 
 # Page navigation logic
 if st.session_state['page'] == 'set_player_names':
@@ -159,3 +167,4 @@ elif st.session_state['page'] == 'new_game':
     nieuw_spel()
 elif st.session_state['page'] == 'save_scores':
     write_to_csv()
+
