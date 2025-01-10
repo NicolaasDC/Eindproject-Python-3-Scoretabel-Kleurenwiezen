@@ -5,7 +5,8 @@ class Kleurenwiezen():
         self.speler2 = speler2
         self.speler3 = speler3
         self.speler4 = speler4
-        self.scores = {speler1: 0, speler2: 0, speler3: 0, speler4: 0}
+        self.spel = None
+        self.scores = {speler1: 0, speler2: 0, speler3: 0, speler4: 0, "spel": None}
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.speler1!r}, {self.speler2!r}, {self.speler3!r}, {self.speler4!r})"
@@ -49,7 +50,7 @@ class Kleurenwiezen():
             "Samen 12": {"vrager": [0, -22, -25, -28, -31, -34, -37, -40], "niet_vrager": [0, 22, 25, 28, 31, 34, 37, 40]},
             "Solo 8": {"vrager": [0, -21, -24, -27, -30, -33, -36, -39], "niet_vrager": [0, 7, 8, 9, 10, 11, 12, 13]},
             "Samen 13": {"vrager": [0, -30, -33, -36, -39, -42, -45, -48], "niet_vrager": [0, 30, 33, 36, 39, 42, 45, 48]},
-            "Abondance 9": {"vrager": [33], "niet_vrager": [-11]},
+            "Abondance 9": {"vrager": [-33], "niet_vrager": [11]},
             "Troel voor 8": {"vrager": [-16, -16, -16, -16, 16, -16, -16, -16], "niet_vrager": [16, 16, 16, 16, 16, 16, 16, 16]},
             "Troel voor 9": {"vrager": [-16, -16, -16, -16, 16, -16, -16, -16], "niet_vrager": [16, 16, 16, 16, 16, 16, 16, 16]},
             "Grote miserie": {"vrager": [-36], "niet_vrager": [12]},
@@ -59,7 +60,9 @@ class Kleurenwiezen():
             "Abondance 12": {"vrager": [-120], "niet_vrager": [40]},
             "Solo slim": {"vrager": [-240], "niet_vrager": [80]}
         }
-
+        
+        self.scores["spel"] = spel
+        
         if speler == self.speler1:
             if vrager == True:
                 if gelukt == True:
