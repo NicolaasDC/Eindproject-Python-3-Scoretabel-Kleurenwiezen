@@ -7,11 +7,11 @@ Dit is een programma dat de score bijhoudt voor een spelletje kleurenwiezen. Dit
 
 ## 🤖 Gebruik
 
-# Nieuwe feature: streamlit user interface
+### Nieuwe feature: streamlit user interface
 
 De app staat online op https://scores-kleurenwiezen.streamlit.app/
 
-# Oude interface
+### Oude interface
 Kopieër de repository op je lokale apparaat. Installeer de externe packages uit het bestand requirements.txt.
 
 Repository link: https://github.com/NicolaasDC/Eindproject-Python-3
