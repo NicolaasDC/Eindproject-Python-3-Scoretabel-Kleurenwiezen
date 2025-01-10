@@ -135,8 +135,8 @@ def main_menu():
             rondes = st.session_state['rondes']
             kleurenwiezen = st.session_state['kleurenwiezen']
             if len(rondes) == 1:
+                kleurenwiezen.scores = {kleurenwiezen.speler1: 0, kleurenwiezen.speler2: 0, kleurenwiezen.speler3: 0, kleurenwiezen.speler4: 0}
                 rondes.pop()
-                kleurenwiezen.scores = {kleurenwiezen.speler1: 0, kleurenwiezen.speler2: 0, kleurenwiezen.speler3: 0, kleurenwiezen.speler4: 0, "spel": None}
                 st.success("Laatste spelletje gewist!")
             if len(rondes) > 1:
                 kleurenwiezen.scores = {kleurenwiezen.speler1: rondes[-2][kleurenwiezen.speler1], kleurenwiezen.speler2: rondes[-2][kleurenwiezen.speler2], kleurenwiezen.speler3: rondes[-2][kleurenwiezen.speler3], kleurenwiezen.speler4: rondes[-2][kleurenwiezen.speler4]}
