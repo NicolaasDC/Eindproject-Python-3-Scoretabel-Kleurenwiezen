@@ -86,7 +86,7 @@ def nieuw_spel():
     else:
         overslagen = 0
 
-    if st.button("Submit Spel"):
+    if st.button("Bevestig Spel"):
         kleurenwiezen = st.session_state['kleurenwiezen']
         spelers = st.session_state['players'].copy()
 
