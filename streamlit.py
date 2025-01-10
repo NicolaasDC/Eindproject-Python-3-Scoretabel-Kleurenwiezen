@@ -114,7 +114,7 @@ def nieuw_spel():
 def write_to_csv():
     st.title("Score Opslaan")
     df = pd.DataFrame(st.session_state['rondes'])
-    st.download_button("Download Score Tabel", df.to_csv(index=False), file_name=f"{date.today()}-{st.session_state['players'][0]}-{st.session_state['players'][1]}-{st.session_state['players'][2]}-{st.session_state['players'][3]}.csv", mime="text/csv")    
+    st.download_button("Download Scoretabel", df.to_csv(index=False), file_name=f"{date.today()}-{st.session_state['players'][0]}-{st.session_state['players'][1]}-{st.session_state['players'][2]}-{st.session_state['players'][3]}.csv", mime="text/csv")    
 
     # Voeg een knop toe om terug te gaan naar het hoofdmenu
     if st.button("Terug naar hoofdmenu"):
@@ -146,7 +146,7 @@ def main_menu():
                 st.error("Er zijn nog geen spelletjes gespeeld om te wissen!")
 
 
-    st.title("Score Tabel")
+    st.title("Scoretabel")
 
     # Display the DataFrame with the custom index
     if 'rondes' in st.session_state and len(st.session_state['rondes']) == 0:
