@@ -15,6 +15,17 @@ if 'page' not in st.session_state:
     st.session_state['page'] = 'set_player_names'  # Default page
 
 # Function to set player names
+import streamlit as st
+
+# Assuming you have a class Kleurenwiezen defined somewhere in your app
+class Kleurenwiezen:
+    def __init__(self, *players):
+        self.players = players
+    
+    # Example method, you can expand it as per your logic
+    def some_method(self):
+        pass
+
 def set_player_names():
     # Initialize players in session state if not already present
     if 'players' not in st.session_state:
@@ -45,6 +56,7 @@ def set_player_names():
             
             # Navigate to the main menu page
             st.session_state['page'] = 'main_menu'
+
 
 # Function to start a new game
 def nieuw_spel():
