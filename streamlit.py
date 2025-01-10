@@ -15,39 +15,19 @@ if 'page' not in st.session_state:
     st.session_state['page'] = 'set_player_names'  # Default page
 
 # Function to set player names
-import streamlit as st
-
-# Assuming you have a class Kleurenwiezen defined somewhere in your app
-class Kleurenwiezen:
-    def __init__(self, *players):
-        self.players = players
-    
-    # Example method, you can expand it as per your logic
-    def some_method(self):
-        pass
-
 def set_player_names():
-    # Initialize players in session state if not already present
-    if 'players' not in st.session_state:
-        st.session_state['players'] = ['', '', '', '']  # List to store player names
-
-    st.title("Welkom beste kleurenwiezers, geef de 4 spelers in:")
-
-    # Loop to get player names via text input fields
+    st.title("Welkom beste kleurenwiezers, geef de 4 spelers in")
     for i in range(4):
         # Pre-fill text input with the existing player name
         name_input = st.text_input(f"Voer speler {i + 1} in:", key=f"player_{i}", value=st.session_state['players'][i])
 
-        # Check if the name is already entered by another player (only before current player) and name_input is not empty
+        # Check if the name is already entered by another player
         if name_input and name_input in st.session_state['players'][:i]:
             st.warning(f"De naam '{name_input}' is al ingevoerd. Kies een andere naam.")
         
         # Update the session state for the player name
         st.session_state['players'][i] = name_input
-
-    # When the user presses the submit button
     if st.button("Submit"):
-        # Check if any player name is empty
         if "" in st.session_state['players']:
             st.error("Vul alle 4 spelersnamen in voordat je verdergaat!")
         else:
@@ -56,7 +36,6 @@ def set_player_names():
             
             # Navigate to the main menu page
             st.session_state['page'] = 'main_menu'
-
 
 # Function to start a new game
 def nieuw_spel():
